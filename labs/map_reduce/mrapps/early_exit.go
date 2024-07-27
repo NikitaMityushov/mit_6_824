@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"mr"
+	"github.com/NikitaMityushov/mit_6_824/labs/map_reduce/mr"
 )
 
 // The map function is called once for each file of input.

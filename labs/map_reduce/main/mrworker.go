@@ -10,7 +10,7 @@ package main
 // Please do not change this file.
 //
 
-import "mr"
+import "github.com/NikitaMityushov/mit_6_824/labs/map_reduce/mr"
 import "plugin"
 import "os"
 import "fmt"

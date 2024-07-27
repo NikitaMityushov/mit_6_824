@@ -7,7 +7,7 @@ package main
 //
 
 import "fmt"
-import "mr"
+import "github.com/NikitaMityushov/mit_6_824/labs/map_reduce/mr"
 
 import "strings"
 import "unicode"

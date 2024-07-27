@@ -8,7 +8,7 @@ package main
 // go build -buildmode=plugin crash.go
 //
 
-import "mr"
+import "github.com/NikitaMityushov/mit_6_824/labs/map_reduce/mr"
 import "math/rand"
 import "strings"
 import "strconv"
