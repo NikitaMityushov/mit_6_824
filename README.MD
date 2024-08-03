@@ -5,6 +5,7 @@
    2. **Papers**: research papers, some classic, some new problems, ideas, implementation details.
    3. **Labs**:
 - Lab 1: MapReduce
-- Lab 2: replication for fault-tolerance using Raft
-- Lab 3: fault-tolerant key/value storage
-- Lab 4: sharded key/value storage
+- Lab 2: key/value server
+- Lab 3: replication for fault-tolerance using Raft
+- Lab 4: fault-tolerant key/value storage
+- Lab 5: sharded key/value storage
