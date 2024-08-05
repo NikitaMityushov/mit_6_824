@@ -73,7 +73,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) string {
 	id := createUniqueID()
 	reply := PutAppendReply{}
 	for {
-		ok := ck.server.Call("KVServer."+op, &PutAppendArgs{Id: id, Key: key, Value: value}, &reply)
+		ok := ck.server.Call("KVServer."+op, &PutAppendArgs{Id: id, Key: key, Value: value, Ttl: TTL_REQUEST}, &reply)
 		if ok {
 			return reply.Value
 		}
@@ -88,4 +88,3 @@ func (ck *Clerk) Put(key string, value string) {
 func (ck *Clerk) Append(key string, value string) string {
 	return ck.PutAppend(key, value, "Append")
 }
-
