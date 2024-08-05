@@ -511,7 +511,7 @@ func (svc *Service) dispatch(methname string, req reqMsg) replyMsg {
 		// encode the reply.
 		rb := new(bytes.Buffer)
 		re := labgob.NewEncoder(rb)
-		re.EncodeVaxlue(replyv)
+		re.EncodeValue(replyv)
 
 		return replyMsg{true, rb.Bytes()}
 	} else {

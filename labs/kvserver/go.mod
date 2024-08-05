@@ -8,9 +8,13 @@ require (
 	github.com/NikitaMityushov/mit_6_824/labs/porcupine v1.0.0
 )
 
-require github.com/google/uuid v1.6.0 // indirect
+require (
+	github.com/NikitaMityushov/mit_6_824/labs/labgob v1.0.0 // indirect
+	github.com/google/uuid v1.6.0
+)
 
 replace (
+	github.com/NikitaMityushov/mit_6_824/labs/labgob => ../labgob
 	github.com/NikitaMityushov/mit_6_824/labs/labrpc => ../labrpc
 	github.com/NikitaMityushov/mit_6_824/labs/models => ../models
 	github.com/NikitaMityushov/mit_6_824/labs/porcupine => ../porcupine
