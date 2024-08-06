@@ -604,4 +604,3 @@ func TestMemManyAppends(t *testing.T) {
 	cfg.deleteClient(ck)
 	cfg.end()
 }
-

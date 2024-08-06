@@ -1,8 +1,6 @@
 package kvserver
 
 import (
-	"crypto/rand"
-	"math/big"
 	"time"
 
 	"github.com/NikitaMityushov/mit_6_824/labs/labrpc"
@@ -10,18 +8,15 @@ import (
 )
 
 type Clerk struct {
-	server *labrpc.ClientEnd
+	// mu               sync.Mutex
+	server           *labrpc.ClientEnd
+	clientId         int64
+	currentRequestId int
+	readRequestId    int
 	// You will have to modify this struct.
 }
 
-func nrand() int64 {
-	max := big.NewInt(int64(1) << 62)
-	bigx, _ := rand.Int(rand.Reader, max)
-	x := bigx.Int64()
-	return x
-}
-
-func createUniqueID() int64 {
+func createUniqueClientID() int64 {
 	currentTimestamp := time.Now().UnixNano() / int64(time.Microsecond)
 
 	// Obtain a unique code using UUID
@@ -33,10 +28,12 @@ func createUniqueID() int64 {
 }
 
 func MakeClerk(server *labrpc.ClientEnd) *Clerk {
-	ck := new(Clerk)
-	ck.server = server
-	// You'll have to add code here.
-	return ck
+	uniqueClientId := createUniqueClientID()
+	ck := Clerk{server: server,
+		clientId:         uniqueClientId,
+		currentRequestId: 0,
+		readRequestId:    0}
+	return &ck
 }
 
 // fetch the current value for a key.
@@ -70,11 +67,21 @@ func (ck *Clerk) Get(key string) string {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) PutAppend(key string, value string, op string) string {
-	id := createUniqueID()
+	ck.currentRequestId++
+	requestId := ck.currentRequestId
 	reply := PutAppendReply{}
 	for {
-		ok := ck.server.Call("KVServer."+op, &PutAppendArgs{Id: id, Key: key, Value: value, Ttl: TTL_REQUEST}, &reply)
+		ok := ck.server.Call(
+			"KVServer."+op,
+			&PutAppendArgs{ClientId: ck.clientId,
+				Key:           key,
+				Value:         value,
+				Ttl:           TTL_REQUEST,
+				RequestId:     requestId,
+				ReadRequestId: ck.readRequestId},
+			&reply)
 		if ok {
+			ck.readRequestId++
 			return reply.Value
 		}
 	}

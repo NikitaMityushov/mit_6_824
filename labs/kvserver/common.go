@@ -4,10 +4,12 @@ import "time"
 
 // Put or Append
 type PutAppendArgs struct {
-	Id    int64
-	Key   string
-	Value string
-	Ttl   time.Duration
+	ClientId  int64
+	Key       string
+	Value     string
+	Ttl       time.Duration
+	RequestId int
+	ReadRequestId int
 }
 
 type PutAppendReply struct {
